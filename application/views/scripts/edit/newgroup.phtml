@@ -1,0 +1,39 @@
+<script type="text/javascript">
+$(document).ready(function () {
+    $('#groupname').keyup(checkInput);
+    $('img#newgroup').imgAreaSelect({
+        handles: true,
+        fadeSpeed: 200,
+        onSelectEnd: setForm});
+});
+
+function setForm (img, selection) {
+    $('#x').val(selection.x1);
+    $('#y').val(selection.y1);
+    $('#width').val(selection.width);
+    $('#height').val(selection.height);
+    $('#document').val('<?= $this->docid ?>');
+    checkInput();
+}
+
+function checkInput() {
+    var x = $('#x').val();
+    var y = $('#y').val();
+    var width = $('#width').val();
+    var height = $('#height').val();
+    var groupname = $('#groupname').val();
+
+    if (width > 0 && height > 0 &&  groupname.length > 2 ) {
+        $('#speichern').removeAttr('disabled');
+    } else {
+        $('#speichern').attr('disabled', 'disabled');
+    }
+    
+}
+</script>
+
+<div id="view-content">
+    <h3>Bitte eindeutiges optisches Erkennungsmerkmal markieren</h3>
+    <?= $this->form ?>
+    <img id="newgroup" style="margin-left: 50px; border:1px; border-color: black; border-style: solid; " src="/ajax/preview/id/<?= $this->docid ?>" />
+</div>

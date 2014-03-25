@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configdata>
+	<nav>
+		<search>
+			<label>Dokument suchen</label>
+			<controller>search</controller>
+			<action>index</action>						
+		</search>
+		
+		<edit>
+			<label>Dokument bearbeiten</label>
+			<controller>edit</controller>
+			<action>index</action>						
+		</edit>
+	</nav>
+
+</configdata>

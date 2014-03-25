@@ -1,0 +1,110 @@
+<?= $this->doctype().PHP_EOL; ?>
+<html>
+
+<head>
+  <?php
+  echo $this->headTitle();
+  echo $this->headMeta();
+
+  $this->headLink()->prependStylesheet('/lib/css/style.css');
+  
+  $this->headLink()->prependStylesheet('/css/imgareaselect-animated.css');
+  $this->headLink()->prependStylesheet('/js/contentflow.css');
+  $this->headLink()->prependStylesheet('/lib/css/jquery-ui/south-street/jquery-ui-1.9.0.custom.min.css');
+
+//$this->headLink()->prependStylesheet('/style/style.css');
+  /*
+  $this->headLink()->prependStylesheet('/css/imgareaselect-animated.css');
+  $this->headLink()->prependStylesheet('/js/contentflow.css');
+  $this->headLink()->prependStylesheet('/css/cupertino/jquery-ui-1.8.21.custom.css');
+  
+   * 
+   */
+  
+  $this->headLink()->prependStylesheet('/lib/css/bootstrap.min.css');
+  echo $this->headLink();
+
+  $this->headScript()->prependFile('/lib/js/bootstrap.min.js');
+  $this->headScript()->prependFile('/lib/js/jquery-ui-1.9.0.custom.min.js');  
+  $this->headScript()->prependFile('/lib/js/jquery-1.8.2.min.js');
+  echo $this->headScript();
+  ?>
+</head>
+
+<body>
+    
+<div class="container-fluid">
+
+<div class="row-fluid offset1">
+
+  <div class="mainnav navbar span10">
+   
+	<div class="navbar-inner">
+		  <a class="brand logolink" href="/"><img src="/lib/img/logot.png" class="logo">&nbsp;</a>
+		  
+		  <!-- Navigation Start -->
+		  <?
+		  if (Application_Model_User::isLoggedIn()) {
+			$navigation = new Zend_Navigation(
+				new Zend_Config_Xml(APPLICATION_PATH . '/configs/navigation.xml', 'nav')
+			);
+			$navigOptions = array(
+				'ulClass' => 'nav mainnav-ul'
+			);
+			
+			echo $this->navigation()
+			->menu()
+			->renderMenu($navigation, $navigOptions);
+		  }
+		  
+		  echo $this->partial('userstatusPartial.phtml');
+		  
+		  ?>
+	</div>
+  </div>	  
+  
+</div>
+
+<div class="row-fluid offset1">
+
+  <?php
+  // sidebar oder nicht?
+  if (isset($this->showSidebar) && $this->showSidebar === false) {
+  ?>
+	<div class="span10 content">
+	<?= $this->layout()->content; ?>
+	</div>
+  <? } else { ?>
+	
+	<div class="span10 content">
+
+	<div class="content span8">
+	<?= $this->layout()->content; ?>
+	</div>
+	
+	<div class="span4 content">
+	<?php
+	if (Application_Model_User::isLoggedIn()) {
+	  echo $this->partial('sidebarPartial.phtml');
+	} else {
+	  echo "&nbsp;";
+	}
+	?>
+	</div>
+
+</div>
+
+  <? } ?>
+
+<!-- closing div row-fluid -->
+</div>
+
+<!-- closing div container-fluid --> 
+</div>    
+    
+<div id="footer">
+Copyright 2012 &copy; deedbox.ch | <a href="#">Impressum</a> | <a href="http://validator.w3.org/check?uri=referer">HTML5</a> | <a href="http://jigsaw.w3.org/css-validator/check/referer">CSS</a>
+</div>
+
+</body>
+</html>
