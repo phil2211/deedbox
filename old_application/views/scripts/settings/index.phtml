@@ -1,0 +1,27 @@
+<?php $this->headTitle()->append('Einstellungen') ?>
+
+<div>
+    <h3>Einstellungen</h3>
+<?php
+if (!$this->isStorageReady) {
+?>
+    <div class="alert alert-info">
+        <b>Dropbox-Authorisierung</b>
+        <p>
+        Um deine Dokumente durch die DeedBox verarbeiten zu lassen, benötigst du einen Dropbox Account. Diesen kannst du <a href="http://db.tt/Eub75pH" target="_blank">hier</a> erstellen.
+        </p>
+        <p>
+        Wenn du bereits einen Dropbox Account hast, klicke den Button unten um die Dropbox als Datenspeicher-Dienst der DeedBox zu aktivieren. Dazu wirst du kurz auf die Loginseite der Dropbox umgeleitet.
+        </p>
+
+        <form action="/settings/index/doactivate/1" method="get">
+             <button class="btn btn-large btn-primary" type="submit">DeedBox mit der Dropbox verbinden</button>
+        </form>
+
+    </div>
+
+    <?= $this->activateUrl; ?>
+<? } ?>
+
+
+</div>

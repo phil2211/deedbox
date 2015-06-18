@@ -1,0 +1,31 @@
+<script language="JavaScript" type="text/javascript">
+    $(document).ready(function() {
+        $('#documentForm').load('/ajax/editform/document/<?= $this->docid ?>');
+
+        $("#documentForm").ajaxComplete(function() {
+            $("#confirm").click(function() {
+                $("#documentForm").triggerHandler("change");
+                return false;
+            });
+        });
+
+
+        $("#documentForm").one("change", function() {
+            var docId = $('#documentId');
+            var docGroup = $('#documentGroup');
+            var docSpec = $('#documentSpec');
+            var docDate = $('#date')
+                        
+            $.get('/ajax/editsave' , {document: docId.val(), 
+                                         group: docGroup.val(),
+                                          spec: docSpec.val(),
+                                          date: docDate.val()});
+        });
+    });
+</script>  
+<h3>Bitte untenstehendes Dokument manuell nachbearbeiten</h3>
+<div id="documentForm">
+</div>
+<div id="bigDoc">
+    <img src="/ajax/preview/id/<?= $this->docid ?>" />
+</div>

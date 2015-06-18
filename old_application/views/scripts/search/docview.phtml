@@ -1,0 +1,15 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        var myPDF = new PDFObject({
+            url: "/ajax/document/id/<?= $this->docid ?>",
+            pdfOpenParams: { view: 'FitH', pagemode: 'none', scrollbars: '1', search: 'Postenauszug', toolbar: '1', statusbar: '1', messages: '1', navpanes: '1' }
+        });
+
+        if (myPDF) {
+            myPDF.embed('docview');
+        }
+    });
+</script>
+<div id="docview" style="height: 700px;">
+    Es ist kein PDF-Plugin verfügbar. <a href="/ajax/document/id/<?= $this->docid ?>">Bitte hier klicken um das PDF herunterzuladen</a>
+</div>
